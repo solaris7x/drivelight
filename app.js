@@ -35,6 +35,6 @@ app.get("/:folder/:segment", driveQuery);
 
 app.get("/gettoken", driveToken);
 
-const port = process.env.port || 3001;
+const port = process.env.PORT || 3001;
 console.log("Listening on " + port);
 app.listen(port);
