@@ -1,9 +1,9 @@
 const { google } = require("googleapis");
 
 const driveToken = async (req, res) => {
-  const servicekey = require("../clutter/keys/renfir-valarian-1x-8e08f8270f2a.json");
-  const client_email = servicekey.client_email;
-  const private_key = servicekey.private_key;
+  // const servicekey = require("../clutter/keys/renfir-valarian-1x-8e08f8270f2a.json");
+  const client_email = process.env.service_email;
+  const private_key = process.env.service_private_key.replace(/\\n/g, "\n");
 
   const scopes = "https://www.googleapis.com/auth/drive.readonly";
   const jwt = new google.auth.JWT(client_email, null, private_key, scopes);
