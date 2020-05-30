@@ -57,33 +57,33 @@ const driveQuery = async (req, res) => {
   );
   console.log(driveFile);
   //Return file if MPD
-  if (driveFile.mimeType == "text/xml") {
-    let filerstream = await drive.files.get(
-      { fileId: driveFile.id, alt: "media" },
-      { responseType: "stream" }
-    );
-    // console.log(filerstream.data);
+  // if (driveFile.mimeType == "text/xml") {
+  let filerstream = await drive.files.get(
+    { fileId: driveFile.id, alt: "media" },
+    { responseType: "stream" }
+  );
+  // console.log(filerstream.data);
 
-    //Set res headers
-    res.header("Content-Type", "text/xml");
-    res.header("Content-Disposition", "attachment");
-    res.header("Cache-Control", "max-age=60, public");
+  //Set res headers
+  res.header("Content-Type", driveFile.mimeType);
+  res.header("Content-Disposition", "attachment");
+  res.header("Cache-Control", "max-age=60, public");
 
-    filerstream.data.pipe(res);
-    filerstream.data.on("error", (err) => {
-      console.log("Error in read stream..." + err);
-    });
-    return;
-    // return res.send("Will get XML soon");
-  } else {
-    const redirURL =
-      "https://www.googleapis.com/drive/v3/files/" +
-      driveFile.id +
-      "?alt=media";
-    console.log(redirURL);
-    return res.status(307).redirect(redirURL);
-    // return res.send("dreibjw");
-  }
+  filerstream.data.pipe(res);
+  filerstream.data.on("error", (err) => {
+    console.log("Error in read stream..." + err);
+  });
+  return;
+  // return res.send("Will get XML soon");
+  // } else {
+  //   const redirURL =
+  //     "https://www.googleapis.com/drive/v3/files/" +
+  //     driveFile.id +
+  //     "?alt=media";
+  //   console.log(redirURL);
+  //   return res.status(307).redirect(redirURL);
+  // return res.send("dreibjw");
+  // }
 };
 
 module.exports = driveQuery;
