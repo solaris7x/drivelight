@@ -5,7 +5,7 @@ const driveQuery = async (req, res) => {
   const client_email = process.env.service_email;
   const private_key = process.env.service_private_key.replace(/\\n/g, "\n");
 
-  console.log(process.env.service_private_key.replace(/\\n/g, "\n"));
+  // console.log(process.env.service_private_key.replace(/\\n/g, "\n"));
   const drive = await driveauth(client_email, private_key);
 
   // console.log(req.params);
