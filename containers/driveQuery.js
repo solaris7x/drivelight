@@ -1,6 +1,7 @@
-const driveauth = require("./driveauth");
+const driveauth = require("../components/driveauth");
 
 const driveQuery = async (req, res) => {
+  try {
     // const servicekey = require("../clutter/keys/renfir-valarian-1x-8e08f8270f2a.json");
     const client_email = process.env.service_email;
     const private_key = process.env.service_private_key.replace(/\\n/g, "\n");
@@ -106,6 +107,10 @@ const driveQuery = async (req, res) => {
       return res.status(307).redirect(redirURL);
       // return res.send("dreibjw");
     }
+  } catch (error) {
+    console.error(error);
+    return res.json("Woops , something broke");
+  }
 };
 
 module.exports = driveQuery;
