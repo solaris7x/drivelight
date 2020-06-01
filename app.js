@@ -27,7 +27,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => res.status(200).send("Hello, This is DriveLight"));
+app.get("/", (req, res) =>
+  res
+    .status(200)
+    .send("Hello, This is DriveLight https://github.com/solaris7x/drivelight")
+);
 
 app.get("/:folder/:segment", driveQuery);
 // (req, res) => {

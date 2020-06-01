@@ -18,7 +18,7 @@ const driveQuery = async (req, res) => {
         pageSize: 50,
         orderBy: "name",
         corpora: "drive",
-        driveId: "0APf25tE9P6-YUk9PVA",
+        driveId: process.env.teamDriveId || "",
         includeTeamDriveItems: true,
         supportsTeamDrives: true,
         fields: "nextPageToken, files(id, name, mimeType, size)",
@@ -47,7 +47,7 @@ const driveQuery = async (req, res) => {
 
     const driveFolder = await driveFindId(
       drive,
-      "1BV64m443RsydpcUDJ_SEMkfdrhKRaJKU",
+      process.env.rootFolder || "",
       // "output_files_k40-test1"
       req.params.folder
     );
